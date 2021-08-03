@@ -1,6 +1,14 @@
 from rest_framework import serializers
 from .models import PetOwner, Pet
 
+
+class PetOwnerListSerializer(serializers.Serializer):
+    
+    id = serializers.IntegerField()
+    first_name = serializers.CharField(max_length=255)
+    last_name = serializers.CharField(max_length=255)
+
+
 class PetOwnerSerializer(serializers.Serializer):
     
     first_name = serializers.CharField(max_length=255)
@@ -11,20 +19,6 @@ class PetOwnerSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return PetOwner.objects.create(**validated_data)
-
-class PetOwnerListSerializer(serializers.Serializer):
-    
-    id = serializers.IntegerField()
-    first_name = serializers.CharField(max_length=255)
-    last_name = serializers.CharField(max_length=255)
-
-
-class PetOwnerDetailSerializer(serializers.Serializer):
-    
-    id = serializers.IntegerField()
-    first_name = serializers.CharField(max_length=255)
-    last_name = serializers.CharField(max_length=255)
-    email = serializers.EmailField()
 
 
 class PetOwnerUpdateSerializer(serializers.Serializer):
@@ -50,7 +44,7 @@ class PetListSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
     type = serializers.CharField()
-    owner = PetOwnerDetailSerializer
+    owner = PetOwnerSerializer #Before was PetOwnerDetails
 
     def create(self, validated_data):
         return Pet.objects.create(**validated_data)
@@ -60,7 +54,7 @@ class PetUpdateSerializer(serializers.Serializer):
 
     name = serializers.CharField(max_length=255)
     type = serializers.CharField()
-    owner = PetOwnerDetailSerializer
+    owner = PetOwnerSerializer #Before was PetOwnerDetails
 
     def update(self, instance, validated_data):
 
