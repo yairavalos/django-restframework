@@ -41,10 +41,10 @@ class PetOwnerUpdateSerializer(serializers.Serializer):
 
 class PetListSerializer(serializers.Serializer):
     
-    id = serializers.IntegerField()
+    id = serializers.ReadOnlyField() #Se deja este campo como de solo lectura solo para visualización
     name = serializers.CharField()
     type = serializers.CharField()
-    owner = PetOwnerSerializer #Before was PetOwnerDetails
+    owner_id = serializers.IntegerField() #PetOwnerSerializer #Before was PetOwnerDetails
 
     def create(self, validated_data):
         return Pet.objects.create(**validated_data)
@@ -54,7 +54,7 @@ class PetUpdateSerializer(serializers.Serializer):
 
     name = serializers.CharField(max_length=255)
     type = serializers.CharField()
-    owner = PetOwnerSerializer #Before was PetOwnerDetails
+    owner_id = serializers.IntegerField() #PetOwnerSerializer #Before was PetOwnerDetails
 
     def update(self, instance, validated_data):
 
