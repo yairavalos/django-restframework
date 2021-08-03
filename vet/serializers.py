@@ -2,12 +2,16 @@ from rest_framework import serializers
 from .models import PetOwner, Pet
 
 
-class PetOwnerListSerializer(serializers.Serializer):
-    
-    id = serializers.IntegerField()
-    first_name = serializers.CharField(max_length=255)
-    last_name = serializers.CharField(max_length=255)
+# Changing Class definition by ModelSerializer
+class PetOwnersListModelSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = PetOwner
+        fields = ["id","first_name","last_name"]
 
+class PetOwnerModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PetOwner
+        fields = ["id","first_name","last_name","address","email","phone"]
 
 class PetOwnerSerializer(serializers.Serializer):
     
@@ -39,16 +43,27 @@ class PetOwnerUpdateSerializer(serializers.Serializer):
         return instance
 
 
-class PetListSerializer(serializers.Serializer):
-    
-    id = serializers.ReadOnlyField() #Se deja este campo como de solo lectura solo para visualización
-    name = serializers.CharField()
-    type = serializers.CharField()
-    owner_id = serializers.IntegerField() #PetOwnerSerializer #Before was PetOwnerDetails
 
-    def create(self, validated_data):
-        return Pet.objects.create(**validated_data)
+# class PetListSerializer(serializers.Serializer):
+#     
+#     id = serializers.ReadOnlyField() #Se deja este campo como de solo lectura solo para visualización
+#     name = serializers.CharField()
+#     type = serializers.CharField()
+#     owner_id = serializers.IntegerField() #PetOwnerSerializer #Before was PetOwnerDetails
+# 
+#     def create(self, validated_data):
+#         return Pet.objects.create(**validated_data)
 
+
+class PetListModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pet
+        fields = ["id","name"]
+
+class PetModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pet
+        fields = ["id","name","type","owner_id"]
 
 class PetUpdateSerializer(serializers.Serializer):
 
