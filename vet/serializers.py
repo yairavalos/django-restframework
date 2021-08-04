@@ -43,18 +43,6 @@ class PetOwnerUpdateSerializer(serializers.Serializer):
         return instance
 
 
-
-# class PetListSerializer(serializers.Serializer):
-#     
-#     id = serializers.ReadOnlyField() #Se deja este campo como de solo lectura solo para visualización
-#     name = serializers.CharField()
-#     type = serializers.CharField()
-#     owner_id = serializers.IntegerField() #PetOwnerSerializer #Before was PetOwnerDetails
-# 
-#     def create(self, validated_data):
-#         return Pet.objects.create(**validated_data)
-
-
 class PetListModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
