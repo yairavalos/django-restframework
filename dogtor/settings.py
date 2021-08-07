@@ -29,6 +29,7 @@ DEBUG = bool(os.getenv("DJANGO_DEBUG", True))
 
 ALLOWED_HOSTS = ["*"]
 
+CORS_ALLOWED_ORIGINS = ["http://localhost:5500"]
 
 # Application definition
 
@@ -40,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
+    "corsheaders", # Front-End Server Deployment
     # My Apps
     'vet',
 ]
@@ -52,7 +56,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+}
 
 ROOT_URLCONF = 'dogtor.urls'
 
