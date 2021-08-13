@@ -17,7 +17,7 @@ from .views import (
 
 urlpatterns = [
     # Login
-    path("token-auth/", authtoken_views.obtain_auth_token, name="token_"),
+    # path("token-auth/", authtoken_views.obtain_auth_token, name="token_"),
     # Pet owners
     path("owners/", PetOwnersListCreateAPIView.as_view(), name="owners_list_apiview"),
     path("owners/<int:pk>/", PetOwnersRetrieveUpdateDestroyAPIView.as_view(), name="owners_retrieve_apiview"),

@@ -36,7 +36,7 @@ class PetOwnersListCreateAPIView(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ["first_name"]
     ordering_fields = ["email"]
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     #filterset_fields = ["first_name"] 
 
     def get_queryset(self):
